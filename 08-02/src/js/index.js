@@ -1,5 +1,5 @@
 /**
- * 8-1 state属性：对于模块来说它是自身属性
+ * 8-2 props 属性：对于模块来说 属于 外来属性，组件之间互相传值
  */
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -19,7 +19,7 @@ class Index extends React.Component {
         return (
             < div > 
                 < HeaderComponent / > 
-                <BodyComponent/>
+                <BodyComponent username={'赵尚华'} userphone={15910277440}/>
                 <FooterComponent/>
             < /div>
         )
