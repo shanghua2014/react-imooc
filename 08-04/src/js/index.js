@@ -1,5 +1,5 @@
 /**
- * 8-3 父子传值，数据双向绑定
+ * 8-4 props属性验证
  */
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -19,7 +19,7 @@ class Index extends React.Component {
         return (
             < div >
                 < HeaderComponent / > 
-                <BodyComponent username={'赵尚华'} userphone={15910277440}/>
+                <BodyComponent username={'shanghua.zhao'} userphone={15910277440}/>
                 <FooterComponent/>
             < /div>
         )
