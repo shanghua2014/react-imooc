@@ -1,5 +1,5 @@
 /**
- * 9-4 CSS样式模块化
+ * 9-3 CSS样式模块化
  */
 const React = require('react');
 const ReactDOM = require('react-dom');
