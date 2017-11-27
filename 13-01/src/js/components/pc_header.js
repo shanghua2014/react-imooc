@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Menu, Icon, Tabs, Message, Form, Modal, Input, Button, Checkbox } from 'antd';
+import { Row, Col, Menu, Icon, Tabs, message, Form, Modal, Input, Button, Checkbox } from 'antd';
 
 const FormItem = Form.Item;
 const SubMenu = Menu.SubMenu;
@@ -49,7 +49,7 @@ class PCHeader extends React.Component{
             console.log(json)
             this.setState({ userNickName: json.NickUserName, userid: json.UserId });
         });
-        // Message.success('请求成功！');
+        message.success('请求成功！');
         this.setModalVisible(false);
 
     }
