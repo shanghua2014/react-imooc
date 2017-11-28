@@ -9,6 +9,7 @@ const MenuItemGroup = Menu.ItemGroup;
 
 
 class PCHeader extends React.Component{
+
     constructor(){
         super();
         this.state = {
@@ -18,6 +19,16 @@ class PCHeader extends React.Component{
             hasLogined : false,
             userNickName:'',
             userid:0
+        }
+    }
+
+    componentWillMount() {
+        if (localStorage.username) {
+            this.setState({
+                hasLogined:true,
+                userNickName:localStorage.username,
+                userid:localStorage.userid
+            })
         }
     }
 
@@ -49,10 +60,13 @@ class PCHeader extends React.Component{
         .then(response => response.json())
         .then(json => {
             this.setState({ userNickName: json.NickUserName, userid: json.UserId });
+            localStorage.username = json.NickUserName;
+            localStorage.userid = json.UserId;
         });
         if (this.state.active == 'login') {
             this.setState({ hasLogined:true});
         }
+        
         message.success('请求成功！');
         this.setModalVisible(false);
     }
@@ -62,6 +76,10 @@ class PCHeader extends React.Component{
         } else if (key == 2) {
             this.setState({active:'register'});
         }
+    }
+    loginout() {
+        this.setState({hasLogined:false});
+        localStorage.clear();
     }
  
 
@@ -74,7 +92,7 @@ class PCHeader extends React.Component{
                     <BrowserRouter>
                         <Link to="/"><Button type="dashed" htmlType="button">个人中心</Button></Link>
                     </BrowserRouter>
-                    &nbsp;&nbsp;<Button type="ghost" htmlType="button">退出</Button>
+                    &nbsp;&nbsp;<Button type="ghost" htmlType="button" onClick={this.loginout.bind(this)}>退出</Button>
                 </Menu.Item>
             :
                 <Menu.Item key="register">

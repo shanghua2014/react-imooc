@@ -20,6 +20,16 @@ class MobileHeader extends React.Component {
         }
     }
 
+    componentWillMount() {
+        if (localStorage.username) {
+            this.setState({
+                hasLogined: true,
+                userNickName: localStorage.username,
+                userid: localStorage.userid
+            })
+        }
+    }
+
     setModalVisible(value) {
         console.log(value);
         this.setState({ modalVisible: value })
@@ -48,6 +58,8 @@ class MobileHeader extends React.Component {
             .then(response => response.json())
             .then(json => {
                 this.setState({ userNickName: json.NickUserName, userid: json.UserId });
+                localStorage.username = json.NickUserName;
+                localStorage.userid = json.UserId;
             });
         if (this.state.active == 'login') {
             this.setState({ hasLogined: true });
@@ -64,15 +76,19 @@ class MobileHeader extends React.Component {
     login() {
         this.setModalVisible(true);
     }
+    loginout() {
+        this.setState({ hasLogined: false });
+        localStorage.clear();
+    }
 
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         const userShow = this.state.hasLogined
         ?
             <BrowserRouter>
-                <Link to="/">
-                    <Icon type="inbox" />
-                </Link>
+                    <Link to="/">
+                        <Icon type="inbox" />
+                    </Link>
             </BrowserRouter>
         :
             <Icon type="setting" onClick={this.login.bind(this)} />
